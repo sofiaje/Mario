@@ -65,20 +65,20 @@ function gameFunction(score, character, bump) {
     score.innerHTML = `Score: ${counter}`
 
 
-    window.addEventListener("keyup", (e) => {
+    window.addEventListener("keyup", async (e) => {
         if (e.code === 'Space' && playerIsAlive) {
             jumpSound.play()
             character.classList.add("jump")
             setTimeout(() => {
                 character.classList.remove("jump")
+                playerIsAlive ? scorePoint() : "";    
             }, 500);
-            scorePoint()
+            
         }
 
     })
 
     function scorePoint() {
-        console.log("poäng")
         counter++
         score.innerText = `Score: ${counter}`
     }
@@ -96,7 +96,7 @@ function gameFunction(score, character, bump) {
             clearInterval(intervalId)
             renderInfo()
         }
-    }, 10);
+    }, 5);
 
 }
 
