@@ -66,7 +66,7 @@ function gameFunction(score, character, bump) {
     score.innerHTML = `Score: ${counter}`
 
 
-    window.addEventListener("keyup", async (e) => {
+    window.addEventListener("keydown", async (e) => {
         if (e.code === 'Space' && playerIsAlive) {
             soundOn ? jumpSound.play() : ""
             character.classList.add("jump")
