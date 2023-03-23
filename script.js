@@ -86,7 +86,7 @@ function gameFunction(score, character, bump) {
     let intervalId = setInterval(function () {
         let characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
         let bumpLeft = parseInt(window.getComputedStyle(bump).getPropertyValue("left"));
-        if (bumpLeft < 190 && bumpLeft > 90 && characterBottom <= 50) {
+        if (bumpLeft > 90 && bumpLeft < 190 && characterBottom <= 50) {
             playerIsAlive = false
             hitSound.play()
 
