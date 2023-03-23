@@ -1,17 +1,13 @@
 let wrapper = document.getElementById("wrapper");
 let startGameBtn = document.querySelector(".startGame")
 let section = document.createElement("section")
-let darkMode = document.querySelector(".darkModeBtn")
 
 let jumpSound = new Audio('./assets/jump2.mp3')
 let hitSound = new Audio('./assets/hit2.mp3')
 
-// function mute() {
-//     jumpSound.pause()
-//     hitSound.pause()
-// }
 
-let index = 0
+let soundOn = true;
+
 document.body.addEventListener("keyup", (e) => {
     if (e.code === 'Enter') {
         renderGame()
@@ -19,11 +15,14 @@ document.body.addEventListener("keyup", (e) => {
 }, { once: true })
 
 function renderGame() {
-    // let soundBtn = document.createElement("button");
-    // let icon = document.createElement("i")
-    // soundBtn.classList.add("invisibleBtn")
-    // icon.classList.add("fa-solid", "fa-volume-xmark", "fa-lg")
-    // soundBtn.append(icon)
+    let soundBtn = document.createElement("button")
+    let icon = document.createElement("i")
+    soundBtn.classList.add("invisibleBtn")
+    !soundOn ? soundBtn.classList.add("grey"): ""
+    icon.classList.add("fa-solid", "fa-volume-high", "fa-lg")
+    // fa-volume-xmark
+    // fa-volume-low
+    soundBtn.append(icon)
 
     let h1 = document.createElement("h1")
     h1.innerText = "Watch out for the bump!";
@@ -49,12 +48,12 @@ function renderGame() {
     character.append(img)
     gameFrame.append(character, bump)
     wrapper.append(h1, gameFrame, score)
-    // wrapper.append(soundBtn)
+    wrapper.append(soundBtn)
 
-    // soundBtn.addEventListener("click", () => {
-    //     console.log("stäng av ljud")
-    //     mute()
-    // })
+    soundBtn.addEventListener("click", () => {
+        soundOn ? soundBtn.classList.add("grey") : soundBtn.classList.remove("grey")
+        soundOn ? soundOn = false : soundOn = true
+    })
 
     gameFunction(score, character, bump)
 }
@@ -67,13 +66,13 @@ function gameFunction(score, character, bump) {
 
     window.addEventListener("keyup", async (e) => {
         if (e.code === 'Space' && playerIsAlive) {
-            jumpSound.play()
+            soundOn ? jumpSound.play() : ""
             character.classList.add("jump")
             setTimeout(() => {
                 character.classList.remove("jump")
-                playerIsAlive ? scorePoint() : "";    
+                playerIsAlive ? scorePoint() : ""
             }, 500);
-            
+
         }
 
     })
@@ -88,7 +87,7 @@ function gameFunction(score, character, bump) {
         let bumpLeft = parseInt(window.getComputedStyle(bump).getPropertyValue("left"));
         if (bumpLeft > 90 && bumpLeft < 190 && characterBottom <= 50) {
             playerIsAlive = false
-            hitSound.play()
+            soundOn ? hitSound.play() : ""
 
             bump.style.animation = "none"
             bump.style.left = bumpLeft + "px"

@@ -4,7 +4,7 @@ To do list
 
 2. Problem: The counter activates when user presses spacebar. This means user 
 gets a point for every jump insted of each time they avoid the moving bump. 
-Solution: points are scored when bump is in specific position, maybe when 
+Possible solution: points are scored when bump is in specific position, maybe when 
 bump has left position 0
 
 3. Make it possible to mute sound
