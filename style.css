@@ -1,0 +1,122 @@
+body {
+    background-color: #0c452c;
+    color: #bcffa9;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+
+a {
+    color: #bcffa9;
+}
+
+section {
+    max-width: 600px;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: #052718;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 1rem;
+    color: #bcffa9;
+    transition: background-color 0.5s ease;
+}
+
+.btn:hover {
+    background-color: #35996e;
+
+}
+
+.gameFrame {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    background-image: url(assets/night.png);
+    background-image: url(assets/nintendo.png);
+    background-size: cover;
+}
+
+.character {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    bottom: 40px;
+    left: 90px;
+}
+
+.bump {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #07ff94;
+    background-color: rgb(242, 37, 37);
+    background-color: #07ff94;
+    position: absolute;
+    bottom: 33px;
+    left: 570px;
+    animation-name: move;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.jump {
+    bottom: 60px;
+    animation-name: jump;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+
+.img {
+    height: 100px;
+    width: 100px;
+}
+
+.bump-img {
+    height: 30px;
+    width: 30px;
+}
+
+.hey {
+    height: 200px;
+    width: 200px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+@keyframes move {
+    0% {
+        left: 570px;
+    }
+
+    100% {
+        left: 0px;
+    }
+}
+
+@keyframes jump {
+    0% {
+        bottom: 40px;
+    }
+
+    30% {
+        bottom: 120px;
+    }
+
+    100% {
+        bottom: 40px;
+    }
+}
