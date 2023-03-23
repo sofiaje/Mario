@@ -1,12 +1,14 @@
 To do list
 
-1. Make mobile friendly 
+- Make mobile friendly 
 
-2. Problem: The counter activates when user presses spacebar. This means user 
-gets a point for every jump insted of each time they avoid the moving bump. 
+- Problem: The counter activates when user presses spacebar. This means user 
+gets a point for every succesful jump instead of each time they avoid the moving bump. 
 Possible solution: points are scored when bump is in specific position, maybe when 
-bump has left position 0
+bump has left-position 0
 
-3. Make it possible to mute sound
+- Darkmode with another, darker image. Check out css variables
 
-4. darkmode with another, darker image. Check out css variables
+- High score list
+
+- Store user sound choice in local storage

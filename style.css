@@ -47,12 +47,10 @@ section {
     width: 200px;
 }
 
-
 /* not using, save for later */
 .hidden {
     display: none;
 }
-
 
 /* btn */
 .btn {
@@ -70,7 +68,6 @@ section {
     background-color: #35996e;
 
 }
-
 
 /* game components */
 .gameFrame {
