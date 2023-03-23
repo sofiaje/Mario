@@ -110,7 +110,7 @@ section {
 
 .jump {
     animation-name: jump;
-    animation-duration: 0.5s;
+    animation-duration: 0.51s;
     animation-iteration-count: infinite;
 }
 

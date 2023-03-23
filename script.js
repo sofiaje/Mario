@@ -67,7 +67,9 @@ function gameFunction(score, character, bump) {
 
 
     window.addEventListener("keydown", async (e) => {
-        if (e.code === 'Space' && playerIsAlive) {
+        let isGrounded = true
+        parseInt(window.getComputedStyle(character).getPropertyValue("bottom")) > 40 ? isGrounded = false : "" 
+        if (e.code === 'Space' && playerIsAlive && isGrounded) {
             soundOn ? jumpSound.play() : ""
             character.classList.add("jump")
             setTimeout(() => {
