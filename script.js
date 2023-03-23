@@ -1,6 +1,7 @@
 let wrapper = document.getElementById("wrapper");
 let startGameBtn = document.querySelector(".startGame")
 let section = document.createElement("section")
+let header = document.getElementById("head")
 
 let jumpSound = new Audio('./assets/jump2.mp3')
 let hitSound = new Audio('./assets/hit2.mp3')
@@ -18,7 +19,7 @@ function renderGame() {
     let soundBtn = document.createElement("button")
     let icon = document.createElement("i")
     soundBtn.classList.add("invisibleBtn")
-    !soundOn ? soundBtn.classList.add("grey"): ""
+    !soundOn ? soundBtn.classList.add("grey") : ""
     icon.classList.add("fa-solid", "fa-volume-high", "fa-lg")
     // fa-volume-xmark
     // fa-volume-low
@@ -48,7 +49,8 @@ function renderGame() {
     character.append(img)
     gameFrame.append(character, bump)
     wrapper.append(h1, gameFrame, score)
-    wrapper.append(soundBtn)
+    header.innerHTML = ""
+    header.append(soundBtn)
 
     soundBtn.addEventListener("click", () => {
         soundOn ? soundBtn.classList.add("grey") : soundBtn.classList.remove("grey")
