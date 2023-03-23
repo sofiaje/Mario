@@ -5,6 +5,13 @@ body {
     font-family: 'Oswald', sans-serif;
 }
 
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 a {
     color: #bcffa9;
 }
@@ -13,13 +20,31 @@ section {
     max-width: 600px;
 }
 
-#wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.invisibleBtn {
+    background-color: rgba(0, 0, 0, 0);
+    color: #bcffa9;
+    border: 0;
 }
 
+/* images */
+.img {
+    height: 100px;
+    width: 100px;
+}
+
+.hey {
+    height: 200px;
+    width: 200px;
+}
+
+
+/* not using, save for later */
+.hidden {
+    display: none;
+}
+
+
+/* btn */
 .btn {
     cursor: pointer;
     margin-top: 10px;
@@ -36,6 +61,8 @@ section {
 
 }
 
+
+/* game components */
 .gameFrame {
     position: relative;
     width: 600px;
@@ -57,8 +84,8 @@ section {
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    box-shadow: 0 0 10px #07ff94;
     background-color: rgb(242, 37, 37);
+    box-shadow: 0 0 10px #07ff94;
     background-color: #07ff94;
     position: absolute;
     bottom: 33px;
@@ -70,33 +97,12 @@ section {
 }
 
 .jump {
-    bottom: 60px;
     animation-name: jump;
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
 }
 
-
-.img {
-    height: 100px;
-    width: 100px;
-}
-
-.bump-img {
-    height: 30px;
-    width: 30px;
-}
-
-.hey {
-    height: 200px;
-    width: 200px;
-}
-
-.hidden {
-    display: none;
-}
-
-
+/* animations */
 @keyframes move {
     0% {
         left: 570px;
