@@ -1,12 +1,9 @@
-let wrapper = document.getElementById("wrapper");
-let startGameBtn = document.querySelector(".startGame")
-let section = document.createElement("section")
+let wrapper = document.getElementById("wrapper")
 let header = document.getElementById("head")
+let section = document.createElement("section")
 
 let jumpSound = new Audio('./assets/jump2.mp3')
 let hitSound = new Audio('./assets/hit2.mp3')
-
-
 let soundOn = true;
 
 document.body.addEventListener("keyup", (e) => {
@@ -21,12 +18,10 @@ function renderGame() {
     soundBtn.classList.add("invisibleBtn")
     !soundOn ? soundBtn.classList.add("grey") : ""
     icon.classList.add("fa-solid", "fa-volume-high", "fa-lg")
-    // fa-volume-xmark
-    // fa-volume-low
     soundBtn.append(icon)
 
     let h1 = document.createElement("h1")
-    h1.innerText = "Watch out for the bump!";
+    h1.innerText = "Watch out for the bump!"
 
     let gameFrame = document.createElement("div")
     gameFrame.classList.add("gameFrame")
@@ -36,6 +31,10 @@ function renderGame() {
 
     let bump = document.createElement("div")
     bump.classList.add("bump")
+
+    setTimeout(function () {
+        bump.classList.add("moving")
+    }, 500)
 
     let img = document.createElement("img")
     img.setAttribute("src", "assets/test.png")
@@ -65,7 +64,6 @@ function gameFunction(score, character, bump) {
     let counter = 0
     score.innerHTML = `Score: ${counter}`
 
-
     window.addEventListener("keydown", async (e) => {
         let isGrounded = true
         parseInt(window.getComputedStyle(character).getPropertyValue("bottom")) > 40 ? isGrounded = false : "" 
@@ -76,9 +74,7 @@ function gameFunction(score, character, bump) {
                 character.classList.remove("jump")
                 playerIsAlive ? scorePoint() : ""
             }, 500);
-
         }
-
     })
 
     function scorePoint() {
@@ -87,8 +83,8 @@ function gameFunction(score, character, bump) {
     }
 
     let intervalId = setInterval(function () {
-        let characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
-        let bumpLeft = parseInt(window.getComputedStyle(bump).getPropertyValue("left"));
+        let characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"))
+        let bumpLeft = parseInt(window.getComputedStyle(bump).getPropertyValue("left"))
         if (bumpLeft > 90 && bumpLeft < 190 && characterBottom <= 50) {
             playerIsAlive = false
             soundOn ? hitSound.play() : ""
@@ -100,7 +96,6 @@ function gameFunction(score, character, bump) {
             renderInfo()
         }
     }, 5);
-
 }
 
 function renderInfo() {
@@ -128,6 +123,3 @@ function createBtn(text) {
     btn.innerText = `${text}`
     return btn;
 }
-
-
-
