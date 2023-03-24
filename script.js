@@ -1,3 +1,5 @@
+//--------------------- global ---------------------
+
 let wrapper = document.getElementById("wrapper")
 let header = document.getElementById("head")
 let section = document.createElement("section")
@@ -5,12 +7,17 @@ let section = document.createElement("section")
 let jumpSound = new Audio('./assets/jump2.mp3')
 let hitSound = new Audio('./assets/hit2.mp3')
 let soundOn = true;
+allScores = []
+
 
 document.body.addEventListener("keyup", (e) => {
     if (e.code === 'Enter') {
         renderGame()
     }
 }, { once: true })
+
+
+//--------------------- game ---------------------
 
 function renderGame() {
     let soundBtn = document.createElement("button")
@@ -40,14 +47,14 @@ function renderGame() {
     img.setAttribute("src", "assets/test.png")
     img.classList.add("img")
 
-    let score = document.createElement("p")
-    score.classList.add("score")
+    let scoreSpan = document.createElement("span")
+    let bestscoreSpan = document.createElement("span")
 
     wrapper.innerText = ""
 
     character.append(img)
     gameFrame.append(character, bump)
-    wrapper.append(h1, gameFrame, score)
+    wrapper.append(h1, gameFrame, scoreSpan, bestscoreSpan)
     header.innerHTML = ""
     header.append(soundBtn)
 
@@ -56,31 +63,28 @@ function renderGame() {
         soundOn ? soundOn = false : soundOn = true
     })
 
-    gameFunction(score, character, bump)
+    bestScore(allScores, bestscoreSpan)
+    gameFunction(scoreSpan, character, bump, bestscoreSpan)
 }
 
-function gameFunction(score, character, bump) {
+function gameFunction(scoreSpan, character, bump, bestscoreSpan) {
     let playerIsAlive = true
     let counter = 0
-    score.innerHTML = `Score: ${counter}`
+    scoreSpan.innerHTML = `Score: ${counter}`
 
     window.addEventListener("keydown", async (e) => {
         let isGrounded = true
-        parseInt(window.getComputedStyle(character).getPropertyValue("bottom")) > 40 ? isGrounded = false : "" 
+        let bumpLeft = parseInt(window.getComputedStyle(bump).getPropertyValue("left"))
+        parseInt(window.getComputedStyle(character).getPropertyValue("bottom")) > 40 ? isGrounded = false : ""
         if (e.code === 'Space' && playerIsAlive && isGrounded) {
             soundOn ? jumpSound.play() : ""
             character.classList.add("jump")
             setTimeout(() => {
                 character.classList.remove("jump")
-                playerIsAlive ? scorePoint() : ""
+                playerIsAlive && bumpLeft < 270 ? counter = scorePoint(counter, scoreSpan) : ""
             }, 500);
         }
     })
-
-    function scorePoint() {
-        counter++
-        score.innerText = `Score: ${counter}`
-    }
 
     let intervalId = setInterval(function () {
         let characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"))
@@ -92,11 +96,31 @@ function gameFunction(score, character, bump) {
             bump.style.animation = "none"
             bump.style.left = bumpLeft + "px"
             character.style.bottom = characterBottom + "px"
+            
             clearInterval(intervalId)
+            allScores.push(counter)
+            bestScore(allScores, bestscoreSpan)
             renderInfo()
         }
     }, 5);
 }
+
+
+//--------------------- score ---------------------
+
+function bestScore(arr, elem) {
+    let sortedArr = [...arr].sort((a, b) => { return a - b })
+    elem.innerText = `Best score: ${sortedArr.slice(-1)}`
+}
+
+function scorePoint(counter, elem) {
+    counter++
+    elem.innerText = `Score: ${counter}`
+    return counter
+}
+
+
+//--------------------- info ---------------------
 
 function renderInfo() {
     let h2 = document.createElement("h2");
@@ -106,9 +130,7 @@ function renderInfo() {
     let infoBtn = createBtn("info")
     wrapper.append(h2, reloadBtn, infoBtn)
 
-    reloadBtn.addEventListener("click", () => {
-        renderGame()
-    })
+    reloadBtn.addEventListener("click", () => { renderGame() })
 
     infoBtn.addEventListener("click", () => {
         section.innerHTML = `<p>Hello! My name is Sofia, I'm a frontend developer student at Nackademin in Stockholm. Checkout my cv and portfolio at <a href="https://sofiaje.github.io/">sofiaje.github.io</a> or try again with the game, I think you'll get a hang of it pretty soon ;)</p>`
@@ -116,7 +138,9 @@ function renderInfo() {
     })
 }
 
-//helping function
+
+//--------------------- helping function ---------------------
+
 function createBtn(text) {
     let btn = document.createElement("button")
     btn.classList.add("btn")
